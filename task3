@@ -1,0 +1,62 @@
+// Define the Role interface
+abstract class Role {
+  void displayRole();
+}
+
+// Person class with Role interface
+class Person implements Role {
+  late String name;
+  late int age;
+  late String address;
+  late Role role;
+
+  // Constructor
+  Person(this.name, this.age, this.address, this.role);
+
+  // Getter methods
+  String get getName => name;
+  int get getAge => age;
+  String get getAddress => address;
+
+  // Implementing Role interface method
+  @override
+  void displayRole() {
+    role.displayRole();
+  }
+}
+
+// Student class extending Person
+class Student extends Person {
+  late String studentID;
+  late String grade;
+  late List<double> courseScores;
+
+  // Constructor
+  Student(String name, int age, String address, Role role, this.studentID, this.grade, this.courseScores)
+      : super(name, age, address, role);
+
+  // Method to calculate average score
+  double calculateAverageScore() {
+    if (courseScores.isEmpty) {
+      return 0.0;
+    }
+    var totalScore = courseScores.reduce((a, b) => a + b);
+    return totalScore / courseScores.length;
+  }
+
+  // Override displayRole method
+  @override
+  void displayRole() {
+    print("Role: Student");
+  }
+}
+
+void main() {
+  // Creating an instance of Student
+  var studentRole = Student('Alice', 20, '123 Student Street', StudentRole(), 'S12345', 'A', [85, 90, 75, 95]);
+
+  // Displaying student's role and average score
+  studentRole.displayRole(); // Output: Role: Student
+  var averageScore = studentRole.calculateAverageScore();
+  print('Average Score: $averageScore'); // Output: Average Score: 86.25
+}
