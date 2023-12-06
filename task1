@@ -1,0 +1,29 @@
+// Define the Role interface
+abstract class Role {
+  void displayRole(); // Method to be implemented by subclasses
+}
+
+// Implementing classes
+class Student implements Role {
+  @override
+  void displayRole() {
+    print("I am a Student.");
+  }
+}
+
+class Teacher implements Role {
+  @override
+  void displayRole() {
+    print("I am a Teacher.");
+  }
+}
+
+void main() {
+  // Creating instances of Student and Teacher
+  var student = Student();
+  var teacher = Teacher();
+
+  // Calling displayRole method on instances
+  student.displayRole(); // Output: I am a Student.
+  teacher.displayRole(); // Output: I am a Teacher.
+}
