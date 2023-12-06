@@ -1,0 +1,89 @@
+// A. Define an interface named Role:
+abstract class Role {
+  void displayRole();
+}
+
+// B. Create a class Person:
+class Person implements Role {
+  late String name;
+  late int age;
+  late String address;
+  late Role role;
+
+  Person(this.name, this.age, this.address, this.role);
+
+  String getName() => name;
+  int getAge() => age;
+  String getAddress() => address;
+
+  @override
+  void displayRole() {
+    role.displayRole();
+  }
+}
+
+// C. Create a class Student that extends Person:
+class Student extends Person {
+  late String studentID;
+  late double grade;
+  late List<double> courseScores;
+
+  Student(String name, int age, String address, Role role, this.studentID, this.grade, this.courseScores)
+      : super(name, age, address, role);
+
+  @override
+  void displayRole() {
+    print("Role: Student");
+  }
+
+  double calculateAverageScore() {
+    double sum = courseScores.reduce((value, element) => value + element);
+    return sum / courseScores.length;
+  }
+}
+
+// D. Create another class Teacher that extends Person:
+class Teacher extends Person {
+  late String teacherID;
+  late List<String> coursesTaught;
+
+  Teacher(String name, int age, String address, Role role, this.teacherID, this.coursesTaught)
+      : super(name, age, address, role);
+
+  @override
+  void displayRole() {
+    print("Role: Teacher");
+  }
+
+  void displayCoursesTaught() {
+    print("Courses Taught:");
+    for (var course in coursesTaught) {
+      print("- $course");
+    }
+  }
+}
+
+// E. Create a class StudentManagementSystem:
+void main() {
+  // Creating instances of Student and Teacher classes
+  var johnCourses = [90, 85, 82];
+  var john = Student("John Doe", 20, "123 Main St", Role(), "ST001", 0.0, johnCourses);
+
+  var mrsSmithCourses = ["Math", "English", "Bangla"];
+  var mrsSmith = Teacher("Mrs. Smith", 35, "456 Oak St", Role(), "T001", mrsSmithCourses);
+
+  // Displaying student and teacher information
+  print("Student Information:");
+  john.displayRole();
+  print("Name: ${john.getName()}");
+  print("Age: ${john.getAge()}");
+  print("Address: ${john.getAddress()}");
+  print("Average Score: ${john.calculateAverageScore()}");
+
+  print("\nTeacher Information:");
+  mrsSmith.displayRole();
+  print("Name: ${mrsSmith.getName()}");
+  print("Age: ${mrsSmith.getAge()}");
+  print("Address: ${mrsSmith.getAddress()}");
+  mrsSmith.displayCoursesTaught();
+}
