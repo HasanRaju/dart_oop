@@ -1,0 +1,55 @@
+// Define the Role interface
+abstract class Role {
+  void displayRole();
+}
+
+// Implementing classes
+class Student implements Role {
+  @override
+  void displayRole() {
+    print("I am a Student.");
+  }
+}
+
+class Teacher implements Role {
+  @override
+  void displayRole() {
+    print("I am a Teacher.");
+  }
+}
+
+// Person class with attributes and Role interface reference
+class Person implements Role {
+  late String name;
+  late int age;
+  late String address;
+  late Role role;
+
+  // Constructor
+  Person(this.name, this.age, this.address, this.role);
+
+  // Getter methods
+  String get getName => name;
+  int get getAge => age;
+  String get getAddress => address;
+
+  // Implementing Role interface method
+  @override
+  void displayRole() {
+    role.displayRole();
+  }
+}
+
+void main() {
+  // Creating instances of Student and Teacher
+  var studentRole = Student();
+  var teacherRole = Teacher();
+
+  // Creating instances of Person
+  var student = Person('Zia', 20, '123 Student Street', studentRole);
+  var teacher = Person('Mujib', 30, '456 Teacher Street', teacherRole);
+
+  // Calling displayRole method on Person instances
+  student.displayRole(); // Output: I am a Student.
+  teacher.displayRole(); // Output: I am a Teacher.
+}
